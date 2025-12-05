@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    container_name: postgres_locadora
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: locadora
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - locadora_network
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: pgadmin_locadora
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@locadora.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - locadora_network
+
+volumes:
+  db_data:
+
+networks:
+  locadora_network:
