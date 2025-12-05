@@ -10,9 +10,6 @@ def get_locacao_detalhes(locacao_id):
     result = execute_query(query, (locacao_id,))
     return result[0] if result else None
 
-
-# ===== ROTINAS (FUNCTIONS E PROCEDURES DO BANCO) =====
-
 def call_prc_cancelar_locacao(locacao_id):
     query = "CALL prc_cancelar_locacao(%s);"
     return execute_query(query, (locacao_id,), fetch=False, commit=True)

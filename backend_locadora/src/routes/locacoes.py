@@ -3,9 +3,6 @@ from src.db.connection import get_db_connection
 
 locacoes_bp = Blueprint("locacoes", __name__)
 
-# ---------------------------------------------------
-# Lista completa (VIEW)
-# ---------------------------------------------------
 @locacoes_bp.route("/locacoes", methods=["GET"])
 def listar_locacoes():
     conn = get_db_connection()
@@ -28,9 +25,6 @@ def listar_locacoes():
     return jsonify(resultado)
 
 
-# ---------------------------------------------------
-# Valor estimado usando sua FUNCTION
-# ---------------------------------------------------
 @locacoes_bp.route("/locacoes/<int:id_locacao>/valor_estimado", methods=["GET"])
 def valor_estimado(id_locacao):
     conn = get_db_connection()
@@ -46,9 +40,6 @@ def valor_estimado(id_locacao):
     return jsonify({"id_locacao": id_locacao, "valor_estimado": float(valor)})
 
 
-# ---------------------------------------------------
-# Dias de atraso usando sua FUNCTION
-# ---------------------------------------------------
 @locacoes_bp.route("/locacoes/<int:id_locacao>/dias_atraso", methods=["GET"])
 def dias_atraso(id_locacao):
     data_devolucao = request.args.get("data_devolucao")
@@ -66,9 +57,6 @@ def dias_atraso(id_locacao):
     return jsonify({"id_locacao": id_locacao, "dias_atraso": dias})
 
 
-# ---------------------------------------------------
-# Cancelar locação usando sua PROCEDURE
-# ---------------------------------------------------
 @locacoes_bp.route("/locacoes/<int:id_locacao>/cancelar", methods=["PUT"])
 def cancelar_locacao(id_locacao):
 
